@@ -1,0 +1,20 @@
+name: Build Windows
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: windows-2022
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Configure CMake
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release -DDEBUG=0 -DTOOLS=1 -DCRASHREPORT=0
+      - name: Build Core
+        run: cmake --build build --config Release --target worldserver authserver
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: CoACore-Windows
+          path: build/bin/Release/
