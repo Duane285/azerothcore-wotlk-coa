@@ -14,11 +14,11 @@ jobs:
       - name: Install Dependencies via vcpkg
         run: vcpkg install openssl:x64-windows boost-system:x64-windows boost-filesystem:x64-windows boost-thread:x64-windows boost-program-options:x64-windows boost-iostreams:x64-windows boost-property-tree:x64-windows boost-regex:x64-windows boost-asio:x64-windows boost-dll:x64-windows boost-process:x64-windows
       - name: Configure CMake
-        run: cmake -B build -DCMAKE_BUILD_TYPE=Release -DDEBUG=0 -DTOOLS=1 -DCRASHREPORT=0 -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Debug -DDEBUG=1 -DTOOLS=1 -DCRASHREPORT=0 -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
       - name: Build Core
-        run: cmake --build build --config Release --target worldserver authserver
+        run: cmake --build build --config Debug --target worldserver authserver
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: CoACore-Windows
-          path: build/bin/Release/
+          path: build/bin/Debug/
